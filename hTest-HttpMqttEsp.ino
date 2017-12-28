@@ -13,6 +13,8 @@ const int mqttPort = 16120;
 const char* mqttUser = "zzonuxcv";
 const char* mqttPassword = "KlKWRy0PQd3Q";
 
+const char* deviceID = "Esp8266Client02";
+
 
 WiFiClient espClient;                              // Initiate WiFiClient Library
 PubSubClient client(espClient);
@@ -42,8 +44,9 @@ void setup() {
  
   while (!client.connected()) {
     Serial.println("Connecting to MQTT...");
- 
-    if (client.connect("ESP8266Client", mqttUser, mqttPassword )) {
+
+    
+    if (client.connect(deviceID, mqttUser, mqttPassword )) {        
       Serial.println("connected");  
     } 
     
@@ -55,7 +58,7 @@ void setup() {
     }
   }
  
-   client.publish("OnAndOff", "Hello from ESP8266");
+   client.publish("OnAndOff", "Hello from ESP8266Client02");          // Unique user id per device  
    client.subscribe("OnAndOff");
  
 }
